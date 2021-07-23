@@ -22,8 +22,7 @@ function Form(props) {
 
 // RETURN
     return (
-        <div>
-            Form goes here
+            <div className='orderForm'>
             <form id='pizza-form'
             onChange={onChange}
             onSubmit={onSubmit}

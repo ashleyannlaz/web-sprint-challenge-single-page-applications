@@ -68,12 +68,11 @@ function App() {
     const newOrder = {
       firstName: formValues.firstName.trim(),
       size: formValues.size,
-      // sauce: formValues.sauce.trim(),
-     pepperoni: formValues.pepperoni,
-     chicken: formValues.chicken,
-     cheese: formValues.cheese,
-     bacon: formValues.bacon,
-     special: formValues.special,
+      pepperoni: formValues.pepperoni,
+      chicken: formValues.chicken,
+      cheese: formValues.cheese,
+      bacon: formValues.bacon,
+      special: formValues.special,
     // toppings: ['pepperoni','chicken','bacon','cheese'].filter(topping => formValues[topping]),
     }
     postNewOrder(newOrder)
@@ -83,23 +82,28 @@ function App() {
   const postNewOrder = newOrder => {
     axios.post('https://reqres.in/api/orders', newOrder)
     .then(res => {
-      setOrders([...orders, res.data])
+      setOrders([...orders, res.data]);
       setFormValues(initialFormValues)
+
     })
     .catch(err => {
       console.log(err)
+    })
+    .finally(() => {
     })
   }
 
   return (
     
     <div>
-      <div>
-        <h2>Header Div</h2>
-      <Link to=''>Home</Link>
-      </div>
+      <nav>
+        <h1>Lambda Eats</h1>
+        <div className='links'>
+          <Link to=''>Home</Link>
+        </div>
+      </nav>
 
-      <div> <h2>Content Div</h2>
+      <div className='orderWrapper'> 
         <Switch>
           <Route path='/pizza/success'>
       {/* Route to Success Page */}

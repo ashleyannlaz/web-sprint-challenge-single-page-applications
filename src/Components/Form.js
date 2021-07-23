@@ -38,7 +38,9 @@ function Form(props) {
             name='firstName'
             value={values.firstName}
             />
+            <div>{errors.firstName}</div>
         </label>
+        
 {/* SIZE - DROP DOWN
  */}
         <label> Size:&nbsp;

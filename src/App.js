@@ -1,6 +1,9 @@
-import React, { useState, useEffect, useHistory } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import axios from 'axios'
+import * as yup from 'yup'
+import schema from './validation/formSchema.js'
+
 import Home from './Components/Home'
 import Form from './Components/Form'
 import Success from './Components/Success'
@@ -17,21 +20,44 @@ const initialFormValues = {
 }
 
 const initialFormErrors = {
-
+  firstName: '',
+  size: '',
+  pepperoni: false,
+  chicken: false,
+  cheese: false,
+  bacon: false,
+  special: '',
 }
 const initialOrders = []
 const inDisabled = true;
 
 function App() {
   const [formValues, setFormValues] = useState(initialFormValues)
-  const [orders, setOrders] = useState([])
+  const [formErrors, setFormErrors] = useState(initialFormErrors)
+  const [orders, setOrders] = useState(initialOrders)
 
 // HANDLE CHANGE
   const changeForm = (name, value) => {
-    // validate(name, value) 
-    // for validation later on
+    validate(name, value)
     setFormValues({...formValues, [name]: value})    
   }
+
+  const validate = (name, value) => {
+    yup
+    .reach (schema,name)
+    .validate(value)
+    .then(() => setFormErrors({...formErrors, [name]: "" ,}))
+    .catch(err => setFormErrors({...formErrors, [name]: err.errors[0]
+      // catch errors and set Form errors to post
+    })
+    )};
+
+    useEffect(() => {
+      schema.isValid(formValues)
+      .then(valid => {
+        // inDisabled(!valid);
+      }); //enables button that is disabled by default
+    }, [formValues]);
 
 // HANDLE SUBMIT
   const formSubmit = (evt) => {
@@ -91,6 +117,7 @@ function App() {
               change={changeForm} 
               values={formValues} 
               submit={formSubmit}
+              errors={formErrors}
             />
           </Route>
           <Route path='/'>

@@ -13,7 +13,7 @@ function Home() {
             Home is where the heart is
             <button id='order-pizza' onClick={routePizzaForm}>Pizza?</button>
             <div>
-                Other food choices
+                <h2>Other food choices</h2>
              </div>
         </div>
     )

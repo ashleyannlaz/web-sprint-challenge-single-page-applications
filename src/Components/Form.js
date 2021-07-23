@@ -29,7 +29,8 @@ function Form(props) {
             >
 {/* NAME INPUT
  */}
-        <label> Name:&nbsp;
+        <label> <div className='err'>{errors.firstName}</div>
+            Name:&nbsp;
             <input 
             id='name-input'
             type='text'
@@ -37,12 +38,14 @@ function Form(props) {
             name='firstName'
             value={values.firstName}
             />
-            <div>{errors.firstName}</div>
+            
         </label>
         
 {/* SIZE - DROP DOWN
  */}
-        <label> Size:&nbsp;
+        <label> 
+        <div className='err'>{errors.size}</div>
+            Size:&nbsp;
             <select 
             id='size-dropdown'
             onChange={onChange}
@@ -113,7 +116,7 @@ function Form(props) {
             >
             </textarea>
         </label>
-        <button id='order-button'
+        <button disabled={disabled} id='order-button'
                 >
         Add to Order
         </button>

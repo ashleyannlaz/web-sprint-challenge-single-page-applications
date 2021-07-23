@@ -82,3 +82,8 @@ nav a{
   margin: 20px;
   padding: 1%;
 }
+
+.err{
+  color: red;
+  font-size: 10px;;
+}

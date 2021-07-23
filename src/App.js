@@ -35,6 +35,9 @@ function App() {
   const [formValues, setFormValues] = useState(initialFormValues)
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [orders, setOrders] = useState(initialOrders)
+  const [disabled, setDisabled] = useState(inDisabled)
+
+
 
 // HANDLE CHANGE
   const changeForm = (name, value) => {
@@ -55,7 +58,7 @@ function App() {
     useEffect(() => {
       schema.isValid(formValues)
       .then(valid => {
-        // inDisabled(!valid);
+        setDisabled(!valid);
       }); //enables button that is disabled by default
     }, [formValues]);
 
@@ -122,6 +125,7 @@ function App() {
               values={formValues} 
               submit={formSubmit}
               errors={formErrors}
+              disabled={disabled}
             />
           </Route>
           <Route path='/'>

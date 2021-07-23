@@ -5,9 +5,7 @@ import '../App.css'
 function Form(props) {
     const { values, change, submit, disabled, errors } = props
     const history = useHistory();
-    const routeSuccess = () => {
-        history.push('/pizza/success')
-    }
+ 
 
     const onChange = (evt) => {
         const { name, value, type, checked } = evt.target
@@ -15,11 +13,20 @@ function Form(props) {
         change(name, valueToUse)
     }
 
+   const onSubmit = (evt) => {
+    history.push('/pizza/success');
+    evt.preventDefault();
+    submit();
+   }
+   
+
+// RETURN
     return (
         <div>
             Form goes here
             <form id='pizza-form'
             onChange={onChange}
+            onSubmit={onSubmit}
             >
 {/* NAME INPUT
  */}
@@ -44,16 +51,16 @@ function Form(props) {
                 <option value=''>
                     --Select Size--
                 </option>
-                <option value='small'>
+                <option value='Small'>
                     Small
                 </option>
-                <option value='medium'>
+                <option value='Medium'>
                     Medium
                 </option>
-                <option value='large'>
+                <option value='Large'>
                     Large
                 </option>
-                <option value='xlarge'>
+                <option value='X-Large'>
                     X-Large
                 </option>
             </select>
@@ -82,7 +89,7 @@ function Form(props) {
                 type='checkbox'
                 name='cheese'
                 onChange={onChange}
-                checked={values.bacon}
+                checked={values.cheese}
             /> Cheese
         </label>
         <label>
@@ -90,7 +97,7 @@ function Form(props) {
                 type='checkbox'
                 name='bacon'
                 onChange={onChange}
-                checked={values.cheese}
+                checked={values.bacon}
             /> Bacon
         </label>
 {/* SPECIAL INSTRUCTIONS TEXT BOX
@@ -106,7 +113,7 @@ function Form(props) {
             </textarea>
         </label>
         <button id='order-button'
-                onClick={routeSuccess}>
+                >
         Add to Order
         </button>
         </form>
